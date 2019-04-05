@@ -1,0 +1,30 @@
+.fora{
+  margin-left: 36%;
+  justify-content: center;
+  display: flex;
+  height: 680px;
+  width: 450px;
+  background-color: rgba(0,0,0,0.75);
+ /* <label class="form-check-label" for="defaultCheck1" style="margin-left: 10px; color: grey">Conectar com o Facebook*/
+}
+.back{
+  background-color: rgb(20,20,20);
+  margin: 5%;
+}
+.centro{
+    align: center;
+    margin-top: 10%;
+}
+.fotos {
+  margin: 10px;
+}
+.gerenciador{
+  text-align: center;
+}
+p{
+text-align:center;
+color: white;
+}
+a{
+  color: white;
+}
