@@ -11,7 +11,6 @@
     $id = $record['id_produtos'];
   }
   
-
   session_cache_expire(30);
   session_start();
 ?>
@@ -22,7 +21,6 @@
     <title>Bem Vindo</title>
     <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-
 
   </head>
 
