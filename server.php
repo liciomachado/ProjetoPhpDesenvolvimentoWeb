@@ -1,43 +1,45 @@
 <?php
 
-$descricao =  "";
-$preco = "";
-$foto = null;
-$id = 0;
-$edit_state = false;
-
-$db = mysqli_connect('localhost','root','','crud');
+$db = mysqli_connect('localhost','root','','db_abc_bolinhas');
 //inserir produtos
 if (isset($_POST['save'])) {
+
+    $encoded_image = "data:" . $_FILES['imagem']['type'] . ";base64," . base64_encode(file_get_contents($_FILES['imagem']['tmp_name']));
+
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
-    $foto = $_POST['foto'];
-
-  $query = "INSERT INTO produtos(descricao, preco, foto) VALUES ('$descricao','$preco','$foto')";
+    $foto = $encoded_image;
+ 
+  $query = "INSERT INTO tb_produtos(descricao, valor, imagem) VALUES ('$descricao','$preco','$foto')";
     mysqli_query($db, $query);
     $_SESSION['msg'] = "Produto Salvo";
     header('location: index.php');
 }
 //atualizar produtos
   if (isset($_POST['update'])) {
+
+    $encoded_image = "data:" . $_FILES['imagem']['type'] . ";base64," . base64_encode(file_get_contents($_FILES['imagem']['tmp_name']));
+    $arquivo = $_FILES["imagem"]["tmp_name"];
+
     $descricao = $_POST['descricao'];
     $preco = $_POST['preco'];
-    $foto = $_POST['foto'];
-    $id = $_POST['id_produtos'];
-
-    mysqli_query($db, "UPDATE produtos SET descricao='$descricao',preco='$preco' WHERE id_produtos=$id");
-    $_SESSION['msg'] = "Produto atualizado";
+    $foto = $encoded_image;
+    $id = $_POST['id'];
+    if(empty($_FILES["imagem"]["tmp_name"])) {
+      mysqli_query($db, "UPDATE tb_produtos SET descricao='$descricao',valor='$preco' WHERE id_produto=$id");
+    }else {
+      mysqli_query($db, "UPDATE tb_produtos SET descricao='$descricao',valor='$preco',imagem='$foto' WHERE id_produto=$id");
+    }
     header('location: index.php');
   }
 //deletar produtos
   if (isset($_GET['del'])) {
 	$id = $_GET['del'];
-	mysqli_query($db, "DELETE FROM produtos WHERE id_produtos=$id");
-	$_SESSION['message'] = "Produto Deletado!";
-	header('location: index.php');
+	mysqli_query($db, "DELETE FROM tb_produtos WHERE id_produto=$id");
+  header('location: index.php');
 }
 
-  $results = mysqli_query($db, "SELECT * FROM produtos");
+  $query = mysqli_query($db, "SELECT * FROM produtos");
   //
   if (isset($_POST['valida'])) {
     $login = $_POST['login'];

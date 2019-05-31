@@ -18,9 +18,7 @@ th, td{
 tr:hover {
     background: #F5F5F5;
 }
-
-
-.btn {
+.btnX {
     padding: 10px;
     font-size: 15px;
     color: white;
